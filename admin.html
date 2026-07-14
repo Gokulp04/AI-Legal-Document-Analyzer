@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Panel | AI Legal</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>⚖ AI Legal</h2>
+
+    <a href="{{ url_for('dashboard') }}">
+        <i class="fas fa-home"></i>
+        Dashboard
+    </a>
+
+    <a href="{{ url_for('admin') }}" class="active">
+        <i class="fas fa-user-shield"></i>
+        Admin Panel
+    </a>
+
+    <a href="{{ url_for('logout') }}">
+        <i class="fas fa-right-from-bracket"></i>
+        Logout
+    </a>
+
+</div>
+
+
+<div class="main">
+
+    <h1>👨‍💼 Admin Dashboard</h1>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>{{ total_users }}</h2>
+            <p>Total Users</p>
+        </div>
+
+        <div class="card">
+            <h2>{{ total_documents }}</h2>
+            <p>Total Documents</p>
+        </div>
+
+        <div class="card">
+            <h2>{{ total_reports }}</h2>
+            <p>AI Reports</p>
+        </div>
+
+    </div>
+
+
+    <h2>Registered Users</h2>
+
+    <table>
+
+        <thead>
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Name</th>
+
+            <th>Email</th>
+
+            <th>Action</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for user in users %}
+
+        <tr>
+
+            <td>{{ user.id }}</td>
+
+            <td>{{ user.name }}</td>
+
+            <td>{{ user.email }}</td>
+
+            <td>
+
+                <a href="{{ url_for('delete_user', user_id=user.id) }}"
+                   class="delete-btn"
+                   onclick="return confirm('Delete this user?')">
+
+                    Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+    <br><br>
+
+
+    <h2>Uploaded Documents</h2>
+
+    <table>
+
+        <thead>
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Filename</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for doc in documents %}
+
+        <tr>
+
+            <td>{{ doc.id }}</td>
+
+            <td>{{ doc.filename }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+
+</html>
