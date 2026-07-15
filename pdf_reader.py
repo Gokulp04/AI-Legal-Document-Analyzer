@@ -1,0 +1,18 @@
+import fitz
+
+def extract_text(pdf_path):
+    text = ""
+
+    pdf = fitz.open(pdf_path)
+
+    for page in pdf:
+        text += page.get_text()
+
+    pdf.close()
+
+    return text
+
+
+# Alias for compatibility with app.py
+def extract_text_from_pdf(pdf_path):
+    return extract_text(pdf_path)
